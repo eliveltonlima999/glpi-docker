@@ -1,0 +1,28 @@
+version: "3.6"
+
+services:
+  #Database Container
+  database:
+    image: mariadb:10.7
+    container_name: database-glpi
+    hostname: database-glpi
+    volumes:
+      - ./database:/var/lib/mysql
+    env_file:
+      - ./database.env
+    restart: always
+
+  #GLPI Container
+  glpi:
+    image: diouxx/glpi
+    container_name: core-glpi
+    hostname: core-glpi
+    ports:
+      - "80:80"
+    volumes:
+      - ./core/html:/var/www/html/glpi
+    environment:
+      - TIMEZONE=America/Rio_Branco
+    restart: always
+    depends_on:
+      - database
