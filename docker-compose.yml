@@ -13,10 +13,10 @@ services:
     restart: always
 
   #GLPI Container
-  glpi:
+  app:
     image: diouxx/glpi
-    container_name: core-glpi
-    hostname: core-glpi
+    container_name: app-glpi
+    hostname: app-glpi
     ports:
       - "80:80"
     volumes:
